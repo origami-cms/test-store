@@ -1,6 +1,6 @@
 {
   "name": "origami-test-store",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "description": "Importable generic tests for Origami Store plugins",
   "main": "tests.js",
   "repository": "https://github.com/origami-cms/test-stores",
