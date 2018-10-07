@@ -1,5 +1,5 @@
 const {expect} = require('chai');
-const {uuidValidate} = require('../lib');
+const {uuidValidate, wrap} = require('../lib');
 const {randomUser} = require('../fixtures');
 
 module.exports = data => {
@@ -38,6 +38,18 @@ module.exports = data => {
             let u = await data.modelUsers.findOne({ id: data.user.id });
 
             expect(u).to.be.null;
+        });
+        it('model.delete(id) for deleted id should error', async () => {
+            return expect(wrap(async () => await data.modelUsers.delete(data.user.id)))
+                .to.be.eventually.rejectedWith(new RegExp(`No resource found with id '${data.user.id}'`));
+        });
+        it('model.delete({id}) for deleted query should error', async () => {
+            return expect(wrap(async () => await data.modelUsers.delete({id: data.user.id})))
+                .to.be.eventually.rejectedWith(/^No resource found$/);
+        });
+        it('model.delete({foo: "bar"}) for unknown query should error', async () => {
+            return expect(wrap(async () => await data.modelUsers.delete({foo: "bar"})))
+                .to.be.eventually.rejectedWith(/^No resource found$/);
         });
     });
 }
