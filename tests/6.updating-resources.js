@@ -31,10 +31,10 @@ module.exports = data => {
             const userCopy = await data.modelUsers.find({id: data.user.id});
             expect(userCopy.name).to.eq('Tom');
         });
-        it('resource.delete() should remove a resource', async () => {
-            const res = await data.user.delete();
+        it('model.delete(id) should remove a resource', async () => {
+            const res = await data.modelUsers.delete(data.user.id);
+            expect(res).to.be.true;
 
-            expect(res).to.be.null;
             let u = await data.modelUsers.findOne({ id: data.user.id });
 
             expect(u).to.be.null;
