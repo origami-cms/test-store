@@ -16,8 +16,8 @@ module.exports = data => {
         it('model.create() should have createdAt as Date', async () => {
             expect(data.user.createdAt).to.be.a('date')
         });
-        it('model.create() should have updatedAt as Date', async () => {
-            expect(data.user.updatedAt).to.be.a('date')
+        it('model.create() should have updatedAt initially as null', async () => {
+            expect(data.user.updatedAt).to.be.eq(null);
         });
         it('model.create() should have deletedAt as null', async () => {
             expect(data.user.deletedAt).to.be.eq(null);
